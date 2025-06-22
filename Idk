@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>A cute proposal…</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Baloo 2', cursive;
+      text-align: center;
+      padding: 50px;
+      color: #d63384;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      z-index: 10;
+      position: relative;
+    }
+    p {
+      font-size: 1.4em;
+      margin-bottom: 40px;
+      z-index: 10;
+      position: relative;
+    }
+    .buttons {
+      margin-top: 20px;
+      z-index: 10;
+      position: relative;
+    }
+    .btn {
+      background-color: #ff69b4;
+      color: white;
+      font-size: 1.6em;
+      padding: 15px 35px;
+      margin: 20px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      box-shadow: 0 4px 8px rgba(255,105,180,0.4);
+      position: relative;
+      z-index: 10;
+    }
+    .btn:hover {
+      transform: scale(1.15);
+      background-color: #ff1493;
+      box-shadow: 0 6px 12px rgba(255,20,147,0.6);
+    }
+    #response {
+      font-size: 1.8em;
+      margin-top: 30px;
+      color: #d63384;
+      min-height: 70px;
+      position: relative;
+      z-index: 10;
+    }
+    .kiss {
+      position: absolute;
+      font-size: 2.5em;
+      animation-name: kiss-move;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      opacity: 0.9;
+      user-select: none;
+      pointer-events: none;
+    }
+    .kiss.heart {
+      color: #e00;
+    }
+    .kiss.kiss {
+      color: #d63384;
+    }
+    @keyframes kiss-move {
+      0% { transform: translateY(0) scale(1); opacity: 0.9; }
+      50% { transform: translateY(-40px) scale(1.4); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.9; }
+    }
+  </style>
+</head>
+<body>
+  <h1>A cute proposal…</h1>
+  <div id="initialMessage">
+    <p>Would you like to have the cutest breakfast date ever with me? 🥐☕💕</p>
+    <div class="buttons">
+      <button class="btn" onclick="antwoordJa()">Yes 😍</button>
+      <button class="btn" onclick="antwoordNee()">No 😢</button>
+    </div>
+  </div>
+  <div id="response"></div>
+  <script>
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function createKiss() {
+      const symbols = [
+        {char: '❤️', className: 'heart'},
+        {char: '💋', className: 'kiss'}
+      ];
+      const choice = symbols[randomInt(0, symbols.length - 1)];
+      const kiss = document.createElement('div');
+      kiss.className = 'kiss ' + choice.className;
+      kiss.innerText = choice.char;
+      kiss.style.left = Math.random() * 100 + 'vw';
+      kiss.style.top = Math.random() * 100 + 'vh';
+      kiss.style.fontSize = (randomInt(25, 45)) + 'px';
+      kiss.style.animationDelay = (Math.random() * 2) + 's';
+      document.body.appendChild(kiss);
+      setTimeout(() => kiss.remove(), 8000);
+    }
+    setInterval(createKiss, 250);
+    function antwoordJa() {
+      document.getElementById('initialMessage').style.display = 'none';
+      const resp = document.getElementById('response');
+      resp.style.color = '#d63384';
+      resp.innerHTML = "I must be dreaming... 💭<br>Or did you just agree to have the cutest breakfast date ever with me? 🥐☕💕";
+    }
+    function antwoordNee() {
+      document.getElementById('initialMessage').style.display = 'none';
+      const resp = document.getElementById('response');
+      resp.style.color = '#999';
+      resp.innerHTML = "Oh no... 😭💔 I'm just a sad little croissant now... 🥐💧";
+    }
+  </script>
+</body>
+</html>
